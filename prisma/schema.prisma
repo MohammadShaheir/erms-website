@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model News {
+  id        Int      @id @default(autoincrement())
+  title     String
+  excerpt   String   @default("")
+  body      String
+  image     String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conference {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  location    String?
+  startDate   DateTime?
+  image       String?
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+}
+
+model Course {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @default("")
+  category    String   @default("عام")
+  duration    String?
+  image       String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Program {
+  id           Int             @id @default(autoincrement())
+  slug         String          @unique
+  title        String
+  degree       String
+  description  String
+  admissionReq String          @default("")
+  image        String?
+  published    Boolean         @default(true)
+  courses      ProgramCourse[]
+}
+
+model ProgramCourse {
+  id          Int     @id @default(autoincrement())
+  programId   Int
+  program     Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  code        String
+  name        String
+  creditHours Int
+  examHours   Int?
+  note        String?
+  order       Int     @default(0)
+}
+
+model BoardMember {
+  id    Int     @id @default(autoincrement())
+  name  String
+  role  String
+  photo String?
+  order Int     @default(0)
+}
+
+model Committee {
+  id    Int    @id @default(autoincrement())
+  name  String
+  order Int    @default(0)
+}
+
+model JournalIssue {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @default("")
+  pdfUrl      String?
+  image       String?
+  date        DateTime @default(now())
+  published   Boolean  @default(true)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

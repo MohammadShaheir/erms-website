@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-50: #f0f5fb;
+  --color-navy-100: #dce7f5;
+  --color-navy-200: #bcd0e8;
+  --color-navy-600: #2a5288;
+  --color-navy-700: #1d3f6e;
+  --color-navy-800: #142e52;
+  --color-navy-900: #0b1f3a;
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --font-sans: var(--font-tajawal), "Tajawal", "Segoe UI", Tahoma, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-slate-800;
+}
+
+.prose-ar {
+  line-height: 2;
+  white-space: pre-line;
+}
+
+.btn-primary {
+  @apply inline-block rounded-lg bg-accent px-6 py-3 font-bold text-navy-900 transition hover:bg-accent-dark hover:text-white;
+}
+
+.btn-outline {
+  @apply inline-block rounded-lg border-2 border-white/70 px-6 py-3 font-bold text-white transition hover:bg-white hover:text-navy-900;
+}
+
+.card {
+  @apply overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg;
+}
+
+.section-title {
+  @apply relative mb-10 inline-block text-3xl font-extrabold text-navy-900;
+}
+.section-title::after {
+  content: "";
+  @apply absolute -bottom-3 right-0 h-1 w-16 rounded bg-accent;
+}
+
+.input {
+  @apply w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-slate-800 outline-none transition focus:border-navy-600 focus:ring-2 focus:ring-navy-100;
+}
+
+.label {
+  @apply mb-1.5 block font-bold text-slate-700;
+}
