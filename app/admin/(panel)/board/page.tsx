@@ -18,7 +18,7 @@ export default async function AdminBoardPage() {
               <div className="flex items-center gap-3 lg:col-span-1">
                 {m.photo ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={m.photo} alt="" className="h-14 w-14 rounded-full object-cover" />
+                  <img src={m.photo} alt="" className="h-14 w-14 rounded-full object-cover object-top" />
                 ) : (
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-navy-800 text-xl text-white">👤</div>
                 )}

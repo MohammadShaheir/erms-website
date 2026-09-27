@@ -41,23 +41,39 @@ export default async function AboutPage() {
       <section className="bg-navy-50 py-14">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="section-title">مجلس الإدارة</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-6 pt-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {board.map((m) => (
-              <div key={m.id} className="card p-6 text-center">
-                {m.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={m.photo}
-                    alt={m.name}
-                    className="mx-auto mb-4 h-28 w-28 rounded-full border-4 border-navy-100 object-cover"
-                  />
-                ) : (
-                  <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full border-4 border-navy-100 bg-navy-800 text-4xl text-white">
-                    👤
-                  </div>
-                )}
-                <h3 className="font-extrabold leading-7 text-navy-900">{m.name}</h3>
-                <div className="mt-1 text-sm font-bold text-accent-dark">{m.role}</div>
+              <div
+                key={m.id}
+                className="group relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:ring-accent/40"
+              >
+                {/* Gradient header band */}
+                <div className="relative h-24 bg-gradient-to-l from-navy-900 via-navy-700 to-navy-600">
+                  <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_20%_120%,#f59e0b,transparent_50%)]" />
+                </div>
+                {/* Avatar overlapping the band */}
+                <div className="-mt-14 flex justify-center">
+                  {m.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={m.photo}
+                      alt={m.name}
+                      className="h-28 w-28 rounded-full object-cover object-top shadow-lg ring-4 ring-white transition group-hover:ring-accent/60"
+                    />
+                  ) : (
+                    <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-b from-navy-600 to-navy-900 text-4xl text-white shadow-lg ring-4 ring-white transition group-hover:ring-accent/60">
+                      👤
+                    </div>
+                  )}
+                </div>
+                <div className="px-5 pb-6 pt-4 text-center">
+                  <h3 className="min-h-14 font-extrabold leading-7 text-navy-900">{m.name}</h3>
+                  <span className="mt-2 inline-block rounded-full bg-accent/15 px-4 py-1 text-sm font-bold text-accent-dark">
+                    {m.role}
+                  </span>
+                </div>
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 right-0 h-1 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
               </div>
             ))}
           </div>
