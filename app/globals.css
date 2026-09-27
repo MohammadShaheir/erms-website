@@ -10,7 +10,7 @@
   --color-navy-900: #0b1f3a;
   --color-accent: #f59e0b;
   --color-accent-dark: #d97706;
-  --font-sans: var(--font-tajawal), "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  --font-sans: var(--font-cairo), "Cairo", "Segoe UI", Tahoma, sans-serif;
 }
 
 html {
@@ -52,4 +52,98 @@ body {
 
 .label {
   @apply mb-1.5 block font-bold text-slate-700;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scroll-triggered reveal (used by <Reveal/>) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* On-load hero animation with stagger */
+.hero-item {
+  opacity: 0;
+  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-item:nth-child(1) { animation-delay: 0.05s; }
+.hero-item:nth-child(2) { animation-delay: 0.2s; }
+.hero-item:nth-child(3) { animation-delay: 0.35s; }
+.hero-item:nth-child(4) { animation-delay: 0.5s; }
+
+.page-header-anim {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Image zoom inside cards */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .img-zoom img,
+.img-zoom:hover img {
+  transform: scale(1.07);
+}
+
+/* Navbar link underline sweep */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: 12px;
+  left: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-item,
+  .page-header-anim {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

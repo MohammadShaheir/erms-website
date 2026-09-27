@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "من نحن" };
@@ -42,17 +43,17 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="section-title">مجلس الإدارة</h2>
           <div className="grid gap-6 pt-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {board.map((m) => (
+            {board.map((m, i) => (
+              <Reveal key={m.id} delay={(i % 4) * 100}>
               <div
-                key={m.id}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:ring-accent/40"
+                className="group relative h-full overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:ring-accent/40"
               >
                 {/* Gradient header band */}
                 <div className="relative h-24 bg-gradient-to-l from-navy-900 via-navy-700 to-navy-600">
                   <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_20%_120%,#f59e0b,transparent_50%)]" />
                 </div>
                 {/* Avatar overlapping the band */}
-                <div className="-mt-14 flex justify-center">
+                <div className="relative z-10 -mt-14 flex justify-center">
                   {m.photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -75,6 +76,7 @@ export default async function AboutPage() {
                 {/* Bottom accent line */}
                 <div className="absolute bottom-0 right-0 h-1 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -85,10 +87,12 @@ export default async function AboutPage() {
         <h2 className="section-title">لجان الجمعية</h2>
         <p className="mb-6 text-slate-600">يساعد مجلس إدارة الجمعية عدد من أعضاء الجمعية في اللجان الآتية:</p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {committees.map((c) => (
-            <div key={c.id} className="rounded-xl border-r-4 border-accent bg-navy-50 px-5 py-4 font-extrabold text-navy-900">
-              {c.name}
-            </div>
+          {committees.map((c, i) => (
+            <Reveal key={c.id} delay={(i % 3) * 100}>
+              <div className="rounded-xl border-r-4 border-accent bg-navy-50 px-5 py-4 font-extrabold text-navy-900 transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                {c.name}
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>

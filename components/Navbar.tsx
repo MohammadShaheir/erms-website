@@ -50,7 +50,7 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className={`rounded-lg px-3 py-2 text-sm font-bold transition ${
+              className={`nav-link rounded-lg px-3 py-2 text-sm font-bold transition ${
                 pathname === l.href
                   ? "bg-accent text-navy-900"
                   : "text-white hover:bg-white/10"
